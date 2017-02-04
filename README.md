@@ -1,30 +1,32 @@
 # Style Transfer (Neural Style)
 
 A tensorflow implementation of style transfer (neural style) described in the papers:
-* [A Neural Algorithm of Artistic Style](https://arxiv.org/pdf/1508.06576v2.pdf) : submitted version
-* [Image Style Transfer Using Convolutional Neural Networks](http://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) : published version
+* [A Neural Algorithm of Artistic Style](https://arxiv.org/pdf/1508.06576v2.pdf) : *submitted version*
+* [Image Style Transfer Using Convolutional Neural Networks](http://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) : *published version*
 by Leon A. Gatys, Alexander S. Ecker, Matthias Bethge
 
 ## Usage
 
 ### Prerequisites
-#### Tensorflow
-#### Python packages : numpy, scipy, PIL, matplotlib
-#### Pretrained VGG19 file : [imagenet-vgg-verydeep-19.mat](http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat)
+1. Tensorflow
+2. Python packages : numpy, scipy, PIL, matplotlib
+3. Pretrained VGG19 file : [imagenet-vgg-verydeep-19.mat](http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat)
 * Please download the file from link above. There is another pretrained model with the same filename but with the different size.
-* Save the file under `pre_trained_models\'
+* Save the file under `pre_trained_models`
 
 ### Running
-`python run_main.py --content <content file> --style <style file> --output <output file>`
-*Example*
+```
+python run_main.py --content <content file> --style <style file> --output <output file>
+```
+*Example*:
 `python run_main.py --content images/tubingen.jpg --style images/starry-night.jpg --output result.jpg`
 
 #### Arguments
-*Mendatory*
+*Mendatory*:<br />
 * `--content`: Filename of the content image. *Default*: `images/tubingen.jpg`
 * `--style`: Filename of the style image. *Default*: `images/starry-night.jpg`
 * `--output`: Filename of the output image. *Default*: `result.jpg`
-*Optional*
+*Optional*:<br />
 * `--model_path`: Filename of the content image. *Default*: `pre_trained_model`
 * `--loss_ratio`: Weight of content-loss relative to style-loss. Alpha over beta in the paper. *Default*: `1e-3`
 * `--content_layers`: *Space-separated* VGG-19 layer names used for content loss computation. *Default*: `conv4_2`
@@ -44,7 +46,7 @@ An image was generated approximately after 150 secs on GTX970.
 <p align="center">
 <img src="images/tubingen.jpg" height="192px">
 <img src="samples/tubingen_shipwreck.jpg" height="192px">
-<img src="samples/tubingen_starry_night.jpg" height="192px">
+<img src="samples/tubingen_starry-night.jpg" height="192px">
 
 <img src="samples/tubingen_seated-nude.jpg" height="192px">
 <img src="samples/tubingen_the_scream.jpg" height="192px">
@@ -55,7 +57,7 @@ An image was generated approximately after 150 secs on GTX970.
 <p align="center">
 <img src="images/kyungbok.jpg" height="192px">
 <img src="samples/kyungbok_shipwreck.jpg" height="192px">
-<img src="samples/kyungbok_starry_night.jpg" height="192px">
+<img src="samples/kyungbok_starry-night.jpg" height="192px">
 
 <img src="samples/kyungbok_seated-nude.jpg" height="192px">
 <img src="samples/kyungbok_the_scream.jpg" height="192px">
