@@ -12,9 +12,11 @@ def parse_args():
     desc = "Tensorflow implementation of 'Image Style Transfer Using Convolutional Neural Networks"
     parser = argparse.ArgumentParser(description=desc)
 
-    parser.add_argument('--model_path', type=str, default='pre_trained_models', help='The directory where the pre-trained model was saved')
-    parser.add_argument('--content', type=str, default='images/tubingen.jpg', help='The location of content image (notation in the paper : p)')
-    parser.add_argument('--style', type=str, default='images/starry-night.jpg', help='The location of style image (notation in the paper : a)')
+    parser.add_argument('--model_path', type=str, default='pre_trained_model', help='The directory where the pre-trained model was saved')
+    parser.add_argument('--content', type=str, default='images/tubingen.jpg', help='File path of content image (notation in the paper : p)', required = True)
+    parser.add_argument('--style', type=str, default='images/starry-night.jpg', help='File path of style image (notation in the paper : a)', required = True)
+    parser.add_argument('--output', type=str, default='result.jpg', help='File path of output image', required = True)
+	
     parser.add_argument('--loss_ratio', type=float, default=1e-3, help='Weight of content-loss relative to style-loss')
 
     parser.add_argument('--content_layers', nargs='+', type=str, default=['conv4_2'], help='VGG19 layers used for content loss')
@@ -38,21 +40,25 @@ def check_args(args):
         assert len(args.content_layers) == len(args.content_layer_weights)
     except:
         print ('content layer info and weight info must be matched')
+        return None
     try:
         assert len(args.style_layers) == len(args.style_layer_weights)
     except:
         print('style layer info and weight info must be matched')
+        return None
 
     try:
         assert args.max_size > 100
     except:
         print ('Too small size')
+        return None
 
     model_file_path = args.model_path + '/' + vgg19.MODEL_FILE_NAME
     try:
         assert os.path.exists(model_file_path)
     except:
         print ('There is no %s'%model_file_path)
+        return None
 
     try:
         size_in_KB = os.path.getsize(model_file_path)/1024
@@ -62,16 +68,19 @@ def check_args(args):
         print('there are some files with the same name')
         print('pre_trained_model used here can be downloaded from bellow')
         print('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat')
+        return None
 
     try:
         assert os.path.exists(args.content)
     except:
         print('There is no %s'%args.content)
+        return None
 
     try:
         assert os.path.exists(args.style)
     except:
         print('There is no %s' % args.style)
+        return None
 
     return args
 
@@ -86,6 +95,8 @@ def main():
 
     # parse arguments
     args = parse_args()
+    if args is None:
+        exit()
 
     # initiate VGG19 model
     model_file_path = args.model_path + '/' + vgg19.MODEL_FILE_NAME
@@ -145,7 +156,7 @@ def main():
     result_image = np.reshape(result_image,shape[1:])
 
     # save result
-    utils.save_image(result_image,'result.jpg')
+    utils.save_image(result_image,args.output)
 
     # utils.plot_images(content_image,style_image, result_image)
 
