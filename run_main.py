@@ -61,8 +61,8 @@ def check_args(args):
         return None
 
     try:
-        size_in_KB = os.path.getsize(model_file_path)/1024
-        assert abs(size_in_KB - 522368) < 1
+        size_in_KB = os.path.getsize(model_file_path)
+        assert abs(size_in_KB - 534904783) < 10
     except:
         print('check file size of \'imagenet-vgg-verydeep-19.mat\'')
         print('there are some files with the same name')
