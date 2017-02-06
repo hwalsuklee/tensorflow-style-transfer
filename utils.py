@@ -15,7 +15,7 @@ def load_image(filename, shape=None, max_size=None):
         # Calculate the appropriate rescale-factor for
         # ensuring a max height and width, while keeping
         # the proportion between them.
-        factor = max_size / np.max(image.size)
+        factor = float(max_size) / np.max(image.size)
 
         # Scale the image's height and width.
         size = np.array(image.size) * factor
