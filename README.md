@@ -5,6 +5,8 @@ A tensorflow implementation of style transfer (neural style) described in the pa
 * [Image Style Transfer Using Convolutional Neural Networks](http://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) : *published version*  
 by Leon A. Gatys, Alexander S. Ecker, Matthias Bethge
 
+The implementation is coincided with the paper both in variable-names and algorithms so that a reader of the paper can understand the code without too much effort.
+
 ## Usage
 
 ### Prerequisites
@@ -42,8 +44,8 @@ python run_main.py --content <content file> --style <style file> --output <outpu
 
 ## Sample results
 ### The Neckarfront in Tübingen, Germany
-There results were obtained from default setting.
-An image was generated approximately after 4 mins on GTX 980 ti.
+There results were obtained from default setting.  
+An image was rendered approximately after 4 mins on GTX 980 ti.
 
 <p align="center">
 <img src="images/tubingen.jpg" height="192px">
@@ -56,8 +58,8 @@ An image was generated approximately after 4 mins on GTX 980 ti.
 </p>
 
 ### The Gyeongbokgung Palace in Seoul, South Korea
-There results were obtained from default setting except `--max_size 1200`
-An image was generated approximately after 19.5 mins on  GTX 980 ti.
+There results were obtained from default setting except `--max_size 1200`.  
+An image was rendered approximately after 19.5 mins on  GTX 980 ti.
 
 <p align="center">
 <img src="images/gyeongbokgung.jpg" height="192px">
@@ -71,23 +73,32 @@ An image was generated approximately after 19.5 mins on  GTX 980 ti.
 
 ## References
 
-There are some tensorflow implementations about the paper.
+The implementation is based on the projects:
 
 #### https://github.com/Hvass-Labs/TensorFlow-Tutorials/blob/master/15_Style_Transfer.ipynb  
 * This is a tutorial version. Comments on code are well provided. Some exercises are given to check what you learn.  
 
 #### https://github.com/anishathalye/neural-style  
-* This is a simple implemetation, but optimizer is not L-BFGS but Adam.  
+* This is a simple and well written implemetation, but some parts like optimizer are not conincided with the paper.  
 
 #### https://github.com/cysmith/neural-style-tf  
 * There are other implementations related to style transfer like video style transfer, color-preserving style transfer etc.  
 
 I went through these implementations and found some differences from each other.
 
-1. Style image shape : there are some variations how to resize a style image.
-2. Optimizer : gradient descent, Adam, L-BFGS
-3. Scale factor of loss : scale factors for content-loss and style-loss are different
-4. Total loss : total variance denoising is implemented differently
+1. Style image shape : there are some variations how to resize a style image.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this implementation, a style image is resized to the shape of a content image  
+2. Optimizer : gradient descent, Adam, L-BFGS.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *In this implementation, only L-BFGS is provided.*  
+3. Scale factor of loss : scale factors for content-loss and style-loss are different.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *In this implementation, style loss is implemented as in the paper.*  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *About content loss, there are 3 choices.*  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * *Choice 1 : as in* [A Neural Algorithm of Artistic Style](https://arxiv.org/pdf/1508.06576v2.pdf)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * *Choice 2 : as in* [Artistic style transfer for videos](https://arxiv.org/abs/1604.08610)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * *Choice 3 : as in* https://github.com/cysmith/neural-style-tf  
+
+4. Total variance denoising : implementation details for total variance denoising are slightly different.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *In this implementation, total variance denoising is not provided since the paper does not use it.*
 
 ## Acknowledgements
-This implementation has been tested on Tensorflow r0.12.
+This implementation has been tested with Tensorflow r0.12 on Windows 10 and Ubuntu 14.04.
