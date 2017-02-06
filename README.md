@@ -31,7 +31,7 @@ python run_main.py --content <content file> --style <style file> --output <outpu
 * `--output`: Filename of the output image. *Default*: `result.jpg`  
 
 *Optional* :  
-* `--model_path`: Filename of the content image. *Default*: `pre_trained_model`
+* `--model_path`: Relative or absolute directory path to pre trained model. *Default*: `pre_trained_model`
 * `--loss_ratio`: Weight of content-loss relative to style-loss. Alpha over beta in the paper. *Default*: `1e-3`
 * `--content_layers`: *Space-separated* VGG-19 layer names used for content loss computation. *Default*: `conv4_2`
 * `--style_layers`: *Space-separated* VGG-19 layer names used for style loss computation. *Default*: `relu1_1 relu2_1 relu3_1 relu4_1 relu5_1`
