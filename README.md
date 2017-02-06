@@ -62,13 +62,13 @@ There results were obtained from default setting except `--max_size 1200`.
 An image was rendered approximately after 19.5 mins on  GTX 980 ti.
 
 <p align="center">
-<img src="images/gyeongbokgung.jpg" height="192px">
-<img src="samples/gyeongbokgung_shipwreck.jpg" height="192px">
-<img src="samples/gyeongbokgung_starry-night.jpg" height="192px">
+<img src="images/gyeongbokgung.jpg" height="172px">
+<img src="samples/gyeongbokgung_shipwreck.jpg" height="172px">
+<img src="samples/gyeongbokgung_starry-night.jpg" height="172px">
 
-<img src="samples/gyeongbokgung_seated-nude.jpg" height="192px">
-<img src="samples/gyeongbokgung_the_scream.jpg" height="192px">
-<img src="samples/gyeongbokgung_kandinsky.jpg" height="192px">
+<img src="samples/gyeongbokgung_seated-nude.jpg" height="172px">
+<img src="samples/gyeongbokgung_the_scream.jpg" height="172px">
+<img src="samples/gyeongbokgung_kandinsky.jpg" height="172px">
 </p>
 
 ## References
@@ -87,7 +87,7 @@ The implementation is based on the projects:
 I went through these implementations and found some differences from each other.
 
 1. Style image shape : there are some variations how to resize a style image.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this implementation, a style image is resized to the shape of a content image  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *In this implementation, a style image is resized to the shape of a content image.*  
 2. Optimizer : gradient descent, Adam, L-BFGS.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *In this implementation, only L-BFGS is provided.*  
 3. Scale factor of loss : scale factors for content-loss and style-loss are different.  
