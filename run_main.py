@@ -113,8 +113,6 @@ def main():
         init_image = style_image
     elif args.initial_type == 'random':
         init_image = np.random.normal(size=content_image.shape, scale=np.std(content_image))
-    elif args.initial_type == 'fft':
-        init_image = utils.get_image_via_FFT(content_image,style_image)
 
     # check input images for style-transfer
     # utils.plot_images(content_image,style_image, init_image)
