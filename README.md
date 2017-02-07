@@ -44,7 +44,7 @@ python run_main.py --content <content file> --style <style file> --output <outpu
 
 ## Sample results
 ### The Neckarfront in Tübingen, Germany
-There results were obtained from default setting.  
+Results were obtained from default setting.  
 An image was rendered approximately after 4 mins on GTX 980 ti.
 
 <p align="center">
@@ -58,7 +58,7 @@ An image was rendered approximately after 4 mins on GTX 980 ti.
 </p>
 
 ### The Gyeongbokgung Palace in Seoul, South Korea
-There results were obtained from default setting except `--max_size 1200`.  
+Results were obtained from default setting except `--max_size 1200`.  
 An image was rendered approximately after 19.5 mins on  GTX 980 ti.
 
 <p align="center">
