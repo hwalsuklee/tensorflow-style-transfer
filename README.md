@@ -11,7 +11,7 @@ The implementation is coincided with the paper both in variable-names and algori
 
 ### Prerequisites
 1. Tensorflow
-2. Python packages : numpy, scipy, PIL, matplotlib
+2. Python packages : numpy, scipy, PIL(or Pillow), matplotlib
 3. Pretrained VGG19 file : [imagenet-vgg-verydeep-19.mat](http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Please download the file from link above.  
