@@ -1,10 +1,11 @@
+# Copyright (c) 2015-2016 Anish Athalye. Released under GPLv3.
 # Most code in this file was borrowed from https://github.com/anishathalye/neural-style/blob/master/vgg.py
 
 import tensorflow as tf
 import numpy as np
 import scipy.io
 
-#http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat
+# download URL : http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat
 MODEL_FILE_NAME = 'imagenet-vgg-verydeep-19.mat'
 
 def _conv_layer(input, weights, bias):
@@ -12,11 +13,9 @@ def _conv_layer(input, weights, bias):
             padding='SAME')
     return tf.nn.bias_add(conv, bias)
 
-# original paper suggests to use avg_pool instead of max_pool
 def _pool_layer(input):
-    return tf.nn.avg_pool(input, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1),
+    return tf.nn.max_pool(input, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1),
             padding='SAME')
-
 
 def preprocess(image, mean_pixel):
     return image - mean_pixel
@@ -57,25 +56,24 @@ class VGG19:
         net = {}
         current = input_image
 
-        for i, name in enumerate(self.layers):
-            kind = name[:4]
-            if kind == 'conv':
-                kernels = self.weights[i][0][0][2][0][0]
-                bias = self.weights[i][0][0][2][0][1]
+        with tf.variable_scope(scope):
+            for i, name in enumerate(self.layers):
+                kind = name[:4]
+                if kind == 'conv':
+                    kernels = self.weights[i][0][0][2][0][0]
+                    bias = self.weights[i][0][0][2][0][1]
 
-                # matconvnet: weights are [width, height, in_channels, out_channels]
-                # tensorflow: weights are [height, width, in_channels, out_channels]
-                kernels = np.transpose(kernels, (1, 0, 2, 3))
-                bias = bias.reshape(-1)
+                    # matconvnet: weights are [width, height, in_channels, out_channels]
+                    # tensorflow: weights are [height, width, in_channels, out_channels]
+                    kernels = np.transpose(kernels, (1, 0, 2, 3))
+                    bias = bias.reshape(-1)
 
-                current = _conv_layer(current, kernels, bias)
-            elif kind == 'relu':
-                current = tf.nn.relu(current)
-            elif kind == 'pool':
-                current = _pool_layer(current)
-            net[name] = current
+                    current = _conv_layer(current, kernels, bias)
+                elif kind == 'relu':
+                    current = tf.nn.relu(current)
+                elif kind == 'pool':
+                    current = _pool_layer(current)
+                net[name] = current
 
         assert len(net) == len(self.layers)
         return net
-
-
