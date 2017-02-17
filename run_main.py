@@ -61,8 +61,8 @@ def check_args(args):
         return None
 
     try:
-        size_in_KB = os.path.getsize(model_file_path)/1024
-        assert abs(size_in_KB - 522368) < 1
+        size_in_KB = os.path.getsize(model_file_path)
+        assert abs(size_in_KB - 534904783) < 10
     except:
         print('check file size of \'imagenet-vgg-verydeep-19.mat\'')
         print('there are some files with the same name')
@@ -113,8 +113,6 @@ def main():
         init_image = style_image
     elif args.initial_type == 'random':
         init_image = np.random.normal(size=content_image.shape, scale=np.std(content_image))
-    elif args.initial_type == 'fft':
-        init_image = utils.get_image_via_FFT(content_image,style_image)
 
     # check input images for style-transfer
     # utils.plot_images(content_image,style_image, init_image)

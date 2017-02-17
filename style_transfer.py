@@ -48,8 +48,7 @@ class StyleTransfer:
         self.As = {}
         for id in self.STYLE_LAYERS:
             self.As[id] = self._gram_matrix(style_layers[id])
-
-        """ define loss function """
+        
         # get layer-values for x
         self.Fs = self.net.feed_forward(self.x, scope='mixed')
 

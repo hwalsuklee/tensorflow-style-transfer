@@ -21,7 +21,7 @@ def _pool_layer(input):
 def preprocess(image, mean_pixel):
     return image - mean_pixel
 
-def unprocess(image, mean_pixel):
+def undo_preprocess(image, mean_pixel):
     return image + mean_pixel
 
 class VGG19:
