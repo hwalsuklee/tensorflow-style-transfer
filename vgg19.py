@@ -57,20 +57,23 @@ class VGG19:
         net = {}
         current = input_image
 
-        with tf.variable_scope(scope):
-            for i, name in enumerate(self.layers):
-                kind = name[:4]
-                if kind == 'conv':
-                    kernels = self.weights[i][0][0][2][0][0]
-                    bias = self.weights[i][0][0][2][0][1]
-                    bias = bias.reshape(-1)
+        for i, name in enumerate(self.layers):
+            kind = name[:4]
+            if kind == 'conv':
+                kernels = self.weights[i][0][0][2][0][0]
+                bias = self.weights[i][0][0][2][0][1]
 
-                    current = _conv_layer(current, kernels, bias)
-                elif kind == 'relu':
-                    current = tf.nn.relu(current)
-                elif kind == 'pool':
-                    current = _pool_layer(current)
-                net[name] = current
+                # matconvnet: weights are [width, height, in_channels, out_channels]
+                # tensorflow: weights are [height, width, in_channels, out_channels]
+                kernels = np.transpose(kernels, (1, 0, 2, 3))
+                bias = bias.reshape(-1)
+
+                current = _conv_layer(current, kernels, bias)
+            elif kind == 'relu':
+                current = tf.nn.relu(current)
+            elif kind == 'pool':
+                current = _pool_layer(current)
+            net[name] = current
 
         assert len(net) == len(self.layers)
         return net
